@@ -1,0 +1,17 @@
+class T5
+{
+    static void Main(string[] args)
+    {
+        int K = 6;
+        string[] A = {"EKA3","R3RRR","3TTTT","KAVFPO","OP3RT","EKA","99TTR","TTR99","O3APEH2E"};
+
+        var extractedStrings = A.Take(K - 1)
+                                .Where(s => s.Length % 2 != 0 && char.IsUpper(s[0]))
+                                .Reverse();
+
+        foreach (var str in extractedStrings)
+        {
+            Console.WriteLine(str);
+        }
+    }
+}
