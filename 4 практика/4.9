@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class T9
+{
+    static void Main(string[] args)
+    {
+        string[] data = 
+        {
+            "1543 2021 Воробьев",
+            "1899 2023 Петров",
+            "1543 2020 Кузнецов",
+            "2048 2022 Соловьев",
+            "2048 2021 Романов",
+            "1899 2023 Фомин",
+            "1899 2023 Тихомиров",
+            "1543 2022 Громов",
+            "1543 2021 Новиков",
+            "1067 2021 Орлов",
+            "2048 2022 Соколов",
+            "1899 2023 Иванов",
+            "1067 2020 Иментев",
+            "1543 2023 Липучкин",
+            "1543 2021 Каменский",
+            "1899 2021 Ромин"
+        };
+
+        var result = data.Select(x => x.Split(' '))
+                         .Select(x => new { School = x[0], Year = x[1], Name = x[2] })
+                         .GroupBy(x => x.Year)
+                         .OrderBy(x => x.Count())
+                         .Select(x => $"{x.Count()} {x.Key}");
+                         //.ToList();
+
+        foreach (var item in result)
+        {
+            Console.WriteLine(item);
+        }
+    }
+}
