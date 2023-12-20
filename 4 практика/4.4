@@ -1,0 +1,15 @@
+class T4
+{
+    static void Main()
+    {
+        int D = 6;
+        int[] A = { 5, 4, 2, 10, 15, 8, 4, 7, 0, 12 };
+
+        var result = A.Where(x => x > D && x % 2 != 0).Reverse();
+
+        foreach (var number in result)
+        {
+            Console.WriteLine(number);
+        }
+    }
+}
