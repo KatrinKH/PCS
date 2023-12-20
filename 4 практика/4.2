@@ -1,0 +1,15 @@
+using System;
+using System.Linq;
+
+class T2
+{
+    static void Main(string[] args)
+    {
+        int D = 3;
+        int[] A = { 55, 65, 909, 1984, 4689, 1009, 22334, 3322, 1234 };
+
+        int result = A.FirstOrDefault(x => x > 0 && x % 10 == D);
+
+        Console.WriteLine(result);
+    }
+}
