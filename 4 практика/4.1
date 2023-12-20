@@ -1,0 +1,15 @@
+class T1
+{
+    static void Main(string[] args)
+    {
+        int[] sequence = { -5, -13, 5, 2, 8, -3, 10, -7, 10, 4 };
+
+        int firstPositive = sequence.FirstOrDefault(x => x > 0);
+        int lastNegative = sequence.LastOrDefault(x => x < 0);
+
+        Console.WriteLine("Первый положительный элемент: " + firstPositive);
+        Console.WriteLine("Последний отрицательный элемент: " + lastNegative);
+
+        Console.ReadLine();
+    }
+}
