@@ -1,0 +1,22 @@
+using System;
+using System.Linq;
+
+class T3
+{
+    static void Main(string[] args)
+    {
+        int L = 4;
+        string[] A = {"XLM","ABCD23","9MIM","mira","35DMSN","OOOAAA","909U","4POP","09J","OP3","OOOP42PPAA32"};
+
+        var result = A.LastOrDefault(s => s.Length == L && Char.IsDigit(s[0]));
+
+        if (result != null)
+        {
+            Console.WriteLine(result);
+        }
+        else
+        {
+            Console.WriteLine("Not found");
+        }
+    }
+}
