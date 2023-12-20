@@ -1,0 +1,67 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Client
+{
+    public int Code { get; set; }
+    public int Year { get; set; }
+    public int Month { get; set; }
+    public int Duration { get; set; }
+}
+
+public class T11
+{
+    public static void Main()
+    {
+        List<Client> clients = new List<Client>
+        {
+            new Client { Code = 5431, Year = 2021, Month = 3, Duration = 90 },
+            new Client { Code = 1253, Year = 2020, Month = 6, Duration = 120 },
+            new Client { Code = 5431, Year = 2022, Month = 1, Duration = 60 },
+            new Client { Code = 8401, Year = 2019, Month = 9, Duration = 30 },
+            new Client { Code = 4431, Year = 2018, Month = 11, Duration = 45 },
+            new Client { Code = 4431, Year = 2021, Month = 12, Duration = 75 },
+            new Client { Code = 5431, Year = 2020, Month = 2, Duration = 0 },
+            new Client { Code = 4431, Year = 2022, Month = 7, Duration = 100 },
+            new Client { Code = 8401, Year = 2019, Month = 9, Duration = 60 },
+            new Client { Code = 5431, Year = 2022, Month = 5, Duration = 45 },
+            new Client { Code = 1253, Year = 2018, Month = 9, Duration = 90 },
+            new Client { Code = 4431, Year = 2017, Month = 7, Duration = 30 },
+            new Client { Code = 8401, Year = 2021, Month = 4, Duration = 60 },
+            new Client { Code = 5431, Year = 2019, Month = 6, Duration = 75 },
+            new Client { Code = 4431, Year = 2022, Month = 0, Duration = 105 },
+            new Client { Code = 1253, Year = 2020, Month = 3, Duration = 45 },
+        };
+        
+        int[] codes = { 5431, 1253, 4431, 8401 };
+        int Ckey = 4431;
+        
+        var filteredClients = clients.Where(c => c.Code == Ckey)
+                                     .GroupBy(c => new { c.Code, c.Year })
+                                     .Select(g => new
+                                     {
+                                         g.Key.Code,
+                                         g.Key.Year,
+                                         MinDuration = g.Where(c => c.Duration > 0)
+                                                       .OrderBy(c => c.Duration)
+                                                       .ThenBy(c => c.Month)
+                                                       .FirstOrDefault()
+                                     })
+                                     .Where(g => g.MinDuration != null)
+                                     .OrderBy(g => g.MinDuration.Duration)
+                                     .ThenBy(g => g.Year);
+        
+        if (filteredClients.Any())
+        {
+            foreach (var client in filteredClients)
+            {
+                Console.WriteLine($"{client.MinDuration.Duration} {client.Year} {client.MinDuration.Month}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Нет данных");
+        }
+    }
+}
