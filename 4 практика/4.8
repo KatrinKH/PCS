@@ -1,0 +1,19 @@
+class T8
+{
+    static void Main(string[] args)
+    {
+        int K = 5;
+        string[] A =  {"AMOIPIUS","AMIN3T","AMINT2","TRY2R","H2O","P1P02","IOIY","101Y","LPO2RET","USB"};
+
+        var intersection = A.Take(K)
+                            .Intersect(A.SkipWhile(s => !char.IsDigit(s.Last())))
+                            .Distinct()
+                            .OrderBy(s => s.Length)
+                            .ThenBy(s => s);
+
+        foreach (var element in intersection)
+        {
+            Console.WriteLine(element);
+        }
+    }
+}
