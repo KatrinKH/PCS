@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class T10
+{
+    static void Main(string[] args)
+    {
+        string[] data = 
+        {
+            "1543 2021 Воробьев",
+            "1899 2023 Петров",
+            "1543 2020 Кузнецов",
+            "2048 2022 Соловьев",
+            "2048 2021 Романов",
+            "1899 2023 Фомин",
+            "1899 2023 Тихомиров",
+            "1543 2022 Громов",
+            "1543 2021 Новиков",
+            "1067 2021 Орлов",
+            "2048 2022 Соколов",
+            "1899 2023 Иванов",
+            "1067 2020 Иментев",
+            "1543 2023 Липучкин",
+            "1543 2021 Каменский",
+            "1899 2021 Ромин"
+        };
+
+        var groupedData = data.Select(x =>
+        {
+            var parts = x.Split(' ');
+            return new { School = int.Parse(parts[0]), Year = int.Parse(parts[1]) };
+        })
+        .GroupBy(x => x.Year)
+        .Select(g => new { Year = g.Key, TotalCount = g.Count() })
+        .OrderBy(x => x.Year);
+
+        var minYear = groupedData.First().Year;
+        var maxYear = groupedData.Last().Year;
+        var minCount = groupedData.Min(x => x.TotalCount);
+        var maxCount = groupedData.Max(x => x.TotalCount);
+
+        Console.WriteLine($"Наименьшее число абитуриентов: {minCount}");
+        Console.WriteLine("Годы, в которые оно было достигнуто:");
+        
+        foreach (var year in groupedData.Where(x => x.TotalCount == minCount).Select(x => x.Year))
+        {
+            Console.WriteLine(year);
+        }
+
+        Console.WriteLine();
+
+        Console.WriteLine($"Наибольшее число абитуриентов: {maxCount}");
+        Console.WriteLine("Годы, в которые оно было достигнуто:");
+        
+        foreach (var year in groupedData.Where(x => x.TotalCount == maxCount).Select(x => x.Year))
+        {
+            Console.WriteLine(year);
+        }
+
+    }
+}
